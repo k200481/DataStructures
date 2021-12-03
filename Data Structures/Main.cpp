@@ -1,30 +1,25 @@
 #include <iostream>
-#include "Sorting.h"
-#include <random>
+#include "AVLTree.h"
 
 int main(void)
 {
-	DSA<int> arr(10);
-	std::mt19937 rng((std::random_device())());
-	
-	for (size_t i = 0; i < 10; i++)
-	{
-		arr[i] = rng() % 100;
-	}
+	AVLTree<int> t;
 
-	for (size_t i = 0; i < arr.GetSize(); i++)
-	{
-		std::cout << arr[i] << ' ';
-	}
-	std::cout << std::endl;
+	t.Insert(5);
+	t.Insert(7);
+	t.Insert(19);
+	t.Insert(12);
+	t.Insert(10);
+	t.Insert(15);
+	t.Insert(18);
+	t.Insert(20);
+	t.Insert(25);
+	t.Insert(23);
+	t.Inorder();
 
-	QuickSort(arr, 0, arr.GetSize() - 1);
-
-	for (size_t i = 0; i < arr.GetSize(); i++)
-	{
-		std::cout << arr[i] << ' ';
-	}
-	std::cout << std::endl;
+	t.Delete(25);
+	t.Delete(23);
+	t.Inorder();
 
 	return 0;
 }
