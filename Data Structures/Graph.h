@@ -19,13 +19,14 @@ private:
 
 public:
 	Graph() = default;
-
+	// adds a new vertex to the graph
 	void AddVertex(size_t val)
 	{
 		verts.push_back(val);
 		edges.push_back(SinglyLinkedList<Edge>());
 	}
-
+	// creates an undirected edge b/w given vertices
+	// if vertices do not exist, creates them
 	void AddEdge(const T& src, const T& dst, int weight = 1)
 	{
 		size_t verts_size = verts.size();
@@ -46,7 +47,8 @@ public:
 		edges[src_idx].push_back({ src_idx, dst_idx, weight });
 		edges[dst_idx].push_back({ dst_idx, src_idx, weight });
 	}
-
+	// performs depth first search on graph starting at the given source node
+	// and outputs all paths found
 	void BFS(const T& src)
 	{
 		auto src_idx = GetVertIdx(src);
@@ -56,29 +58,37 @@ public:
 			return;
 		}
 
+		// queue for bfs
 		LinkedListQueue<DSA<size_t>> q;
+		// push first list onto queue
 		q.push(DSA<size_t>{ 1, src_idx });
 
 		while (!q.empty())
 		{
-			auto f = q.front();
+			// get first path in queue
+			auto path = q.front();
 			q.pop();
 
 			bool completed = true;
-			for (auto& e : edges[f.back()])
+			// iterate over all vertices adjacent to the last vertex in the path
+			for (auto& e : edges[path.back()])
 			{
-				if (!f.Has(e.dst))
+				// if a vertex doesn't form a cycle add it to the path
+				// and push the new path onto the queue
+				if (!path.Has(e.dst))
 				{
-					auto temp = f;
+					auto temp = path;
 					temp.push_back(e.dst);
 					q.push(temp);
 					completed = false;
 				}
 			}
 
+			// if no new vertices wrre added, the path is at a dead-end
+			// print it
 			if (completed)
 			{
-				for (auto& idx : f)
+				for (auto& idx : path)
 				{
 					std::cout << verts[idx] << " ";
 				}
@@ -86,7 +96,8 @@ public:
 			}
 		}
 	}
-
+	// performs depth first search on graph starting at the given source node
+	// and outputs all paths found
 	void DFS(const T& src)
 	{
 		size_t src_idx = GetVertIdx(src);
@@ -96,17 +107,23 @@ public:
 			return;
 		}
 
+		// stack for DFS
 		LinkedListStack<DSA<size_t>> s;
+		// push first path onto stack
 		s.push(DSA<size_t>{ 1, src_idx });
 
 		while (!s.empty())
 		{
+			// get the path at the top of the stack
 			auto f = s.top();
 			s.pop();
 
 			bool completed = true;
+			// iterate over all vertices adjacent to the last vertex in the path
 			for (auto& e : edges[f.back()])
 			{
+				// if a vertex doesn't form a cycle add it to the path
+				// and push the new path onto the queue
 				if (!f.Has(e.dst))
 				{
 					auto temp = f;
@@ -116,6 +133,8 @@ public:
 				}
 			}
 
+			// if no new vertices were added, the path is at a dead-end
+			// print it
 			if (completed)
 			{
 				for (auto& idx : f)
@@ -126,7 +145,8 @@ public:
 			}
 		}
 	}
-
+	// runs the bellman ford algorithm on the graph to find the 
+	// shortest path to every node from the given source node
 	void Bellmanford(const T& src)
 	{
 		size_t src_idx = GetVertIdx(src);
@@ -150,6 +170,7 @@ public:
 			}
 		}
 
+		// check for negative weight cycle
 		for (auto& lst : edges)
 		{
 			for (auto& e : lst)
@@ -169,6 +190,8 @@ public:
 	}
 
 private:
+	// returs the index of a given vertex
+	// if vertex does not exist, returns the size of the vertex array
 	size_t GetVertIdx(const T& val)
 	{
 		for (size_t i = 0; i < verts.size(); i++)
