@@ -16,35 +16,35 @@ public:
 	
 	void push(const T& val)
 	{
-		if (top >= arr.GetSize())
+		if (top_ptr >= arr.GetSize())
 		{
 			arr.PushBack(val);
-			top++;
+			top_ptr++;
 			return;
 		}
-		arr[top++] = val;
+		arr[top_ptr++] = val;
 	}
 	const T& top() const
 	{
-		if (top == 0)
+		if (top_ptr == 0)
 		{
 			throw std::exception("Stack Underflow");
 		}
-		return arr[top - 1];
+		return arr[top_ptr - 1];
 	}
 	void pop()
 	{
-		if (top > 0)
-			top--;
+		if (top_ptr > 0)
+			top_ptr--;
 	}
 	bool empty() const
 	{
-		return top == 0;
+		return top_ptr == 0;
 	}
 
 private:
 	DSA<T> arr;
-	size_t top = 0;
+	size_t top_ptr = 0;
 };
 
 template <typename T>
@@ -67,7 +67,7 @@ public:
 	LinkedListStack() = default;
 	~LinkedListStack()
 	{
-		delete top;
+		delete top_ptr;
 	}
 	LinkedListStack(const LinkedListStack& rhs)
 	{
@@ -77,8 +77,8 @@ public:
 	{
 		if (this == &rhs)
 			return *this;
-		delete top;
-		Node* ptr = rhs.top;
+		delete top_ptr;
+		Node* ptr = rhs.top_ptr;
 		while (ptr != nullptr)
 		{
 			push(ptr->val);
@@ -88,12 +88,12 @@ public:
 
 	void push(const T& val)
 	{
-		if (top == nullptr)
+		if (top_ptr == nullptr)
 		{
-			top = new Node(val);
+			top_ptr = new Node(val);
 			return;
 		}
-		Node* ptr = top;
+		Node* ptr = top_ptr;
 		while (ptr->next != nullptr)
 		{
 			ptr = ptr->next;
@@ -102,28 +102,28 @@ public:
 	}
 	const T& top()
 	{
-		if (top == nullptr)
+		if (top_ptr == nullptr)
 		{
 			throw std::exception("Stack Underflow");
 		}
-		return top->val;
+		return top_ptr->val;
 	}
 	void pop()
 	{
-		if (top == nullptr)
+		if (top_ptr == nullptr)
 		{
 			throw std::exception("Stack Underflow");
 		}
-		Node* temp = top;
-		top = top->next;
+		Node* temp = top_ptr;
+		top_ptr = top_ptr->next;
 		temp->next = nullptr;
 		delete temp;
 	}
 	bool empty() const
 	{
-		return top == nullptr;
+		return top_ptr == nullptr;
 	}
 
 private:
-	Node* top = nullptr;
+	Node* top_ptr = nullptr;
 };
