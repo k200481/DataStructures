@@ -14,7 +14,7 @@ public:
 			throw std::invalid_argument("Size must be grater than 0");
 	}
 	
-	void Push(const T& val)
+	void push(const T& val)
 	{
 		if (top >= arr.GetSize())
 		{
@@ -24,7 +24,7 @@ public:
 		}
 		arr[top++] = val;
 	}
-	const T& Peek() const
+	const T& top() const
 	{
 		if (top == 0)
 		{
@@ -32,12 +32,12 @@ public:
 		}
 		return arr[top - 1];
 	}
-	void Pop()
+	void pop()
 	{
 		if (top > 0)
 			top--;
 	}
-	bool IsEmpty() const
+	bool empty() const
 	{
 		return top == 0;
 	}
@@ -81,12 +81,12 @@ public:
 		Node* ptr = rhs.top;
 		while (ptr != nullptr)
 		{
-			Push(ptr->val);
+			push(ptr->val);
 			ptr = ptr->next;
 		}
 	}
 
-	void Push(const T& val)
+	void push(const T& val)
 	{
 		if (top == nullptr)
 		{
@@ -100,7 +100,7 @@ public:
 		}
 		ptr->next = new Node(val);
 	}
-	const T& Peek()
+	const T& top()
 	{
 		if (top == nullptr)
 		{
@@ -108,7 +108,7 @@ public:
 		}
 		return top->val;
 	}
-	void Pop()
+	void pop()
 	{
 		if (top == nullptr)
 		{
@@ -119,7 +119,7 @@ public:
 		temp->next = nullptr;
 		delete temp;
 	}
-	bool IsEmpty() const
+	bool empty() const
 	{
 		return top == nullptr;
 	}

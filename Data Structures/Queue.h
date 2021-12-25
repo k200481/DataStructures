@@ -11,7 +11,7 @@ public:
 		arr(size)
 	{}
 
-	void Push(const T& val)
+	void push(const T& val)
 	{
 		if (tail >= arr.GetSize())
 		{
@@ -21,7 +21,7 @@ public:
 		}
 		arr[tail++] = val;
 	}
-	const T& Peek() const
+	const T& front() const
 	{
 		if (tail == 0)
 		{
@@ -29,7 +29,7 @@ public:
 		}
 		return arr[head];
 	}
-	void Pop()
+	void pop()
 	{
 		if (tail == 0)
 		{
@@ -43,7 +43,7 @@ public:
 		}
 	}
 
-	bool IsEmpty() const
+	bool empty() const
 	{
 		return tail == 0;
 	}
@@ -62,7 +62,7 @@ public:
 		arr(size)
 	{}
 
-	void Push(const T& val)
+	void push(const T& val)
 	{
 		if (tail == 0)
 		{
@@ -89,15 +89,15 @@ public:
 		}
 		tail++;
 	}
-	const T& Peek() const
+	const T& front() const
 	{
-		if (IsEmpty())
+		if (empty())
 		{
 			throw std::exception("Queue Underflow");
 		}
 		return arr[head];
 	}
-	void Pop()
+	void pop()
 	{
 		if (head == 0)
 		{
@@ -120,7 +120,7 @@ public:
 		}
 	}
 
-	bool IsEmpty() const
+	bool empty() const
 	{
 		return tail == 0 && head == 0;
 	}
@@ -161,12 +161,12 @@ public:
 		Node* ptr = rhs.head;
 		while (ptr != nullptr)
 		{
-			Push(ptr->val);
+			push(ptr->val);
 			ptr = ptr->next;
 		}
 	}
 
-	void Push(const T& val)
+	void push(const T& val)
 	{
 		if (head == nullptr)
 		{
@@ -177,11 +177,11 @@ public:
 		tail->next = new Node(val);
 		tail = tail->next;
 	}
-	const T& Peek() const
+	const T& front() const
 	{
 		return head->val;
 	}
-	void Pop()
+	void pop()
 	{
 		if (head == tail)
 		{
@@ -196,7 +196,7 @@ public:
 		delete temp;
 	}
 
-	bool IsEmpty() const
+	bool empty() const
 	{
 		return head == nullptr;
 	}
