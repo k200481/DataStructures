@@ -144,8 +144,10 @@
   <ItemGroup>
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="DSA.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="HashMap.h" />
     <ClInclude Include="Heap.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="Stack.h" />

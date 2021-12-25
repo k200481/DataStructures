@@ -1,25 +1,20 @@
 #include <iostream>
-#include "AVLTree.h"
+#include "Graph.h"
 
 int main(void)
 {
-	AVLTree<int> t;
+	Graph<int> g;
 
-	t.Insert(5);
-	t.Insert(7);
-	t.Insert(19);
-	t.Insert(12);
-	t.Insert(10);
-	t.Insert(15);
-	t.Insert(18);
-	t.Insert(20);
-	t.Insert(25);
-	t.Insert(23);
-	t.Inorder();
 
-	t.Delete(25);
-	t.Delete(23);
-	t.Inorder();
+	g.AddEdge(0, 1);
+	g.AddEdge(0, 2);
+	g.AddEdge(0, 3);
+	g.AddEdge(0, 4);
+	g.AddEdge(0, 5);
+
+	g.BFS(0);
+	g.DFS(0);
+	g.Bellmanford(0);
 
 	return 0;
 }
