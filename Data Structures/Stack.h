@@ -16,9 +16,9 @@ public:
 	
 	void push(const T& val)
 	{
-		if (top_ptr >= arr.GetSize())
+		if (top_ptr >= arr.cur_size())
 		{
-			arr.PushBack(val);
+			arr.push_back(val);
 			top_ptr++;
 			return;
 		}

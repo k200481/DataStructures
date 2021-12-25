@@ -13,9 +13,9 @@ public:
 
 	void push(const T& val)
 	{
-		if (tail >= arr.GetSize())
+		if (tail >= arr.cur_size())
 		{
-			arr.PushBack(val);
+			arr.push_back(val);
 			tail++;
 			return;
 		}
@@ -68,7 +68,7 @@ public:
 		{
 			arr[tail] = val;
 		}
-		else if (tail < arr.GetSize())
+		else if (tail < arr.cur_size())
 		{
 			if (tail == head)
 			{
@@ -77,7 +77,7 @@ public:
 			}
 			arr[tail] = val;
 		}
-		else if (tail == arr.GetSize())
+		else if (tail == arr.cur_size())
 		{
 			if (head == 0)
 			{
@@ -105,14 +105,14 @@ public:
 			{
 				throw std::exception("Queue Underflow");
 			}
-			else if (tail == arr.GetSize())
+			else if (tail == arr.cur_size())
 			{
 				head++;
 				tail = 0;
 				return;
 			}
 		}
-		head = (head + 1) % arr.GetSize();
+		head = (head + 1) % arr.cur_size();
 		if (head == tail)
 		{
 			head = 0;

@@ -13,9 +13,9 @@ public:
 
 	void Push(const T& val)
 	{
-		if (idx == arr.GetSize())
+		if (idx == arr.cur_size())
 		{
-			arr.PushBack(val);
+			arr.push_back(val);
 			idx++;
 			ShiftUp(idx - 1);
 			return;

@@ -4,7 +4,7 @@
 template <typename T>
 void InsertionSort(DSA<T>& arr)
 {
-	auto size = arr.GetSize();
+	auto size = arr.cur_size();
 	for (size_t i = 1; i < size; i++)
 	{
 		size_t pos = i;
@@ -21,8 +21,8 @@ void InsertionSort(DSA<T>& arr)
 template <typename T>
 void ShellSort(DSA<T>& arr)
 {
-	const auto size = arr.GetSize();
-	auto N = arr.GetSize() / 3;
+	const auto size = arr.cur_size();
+	auto N = arr.cur_size() / 3;
 	// get the window size
 	size_t h = 1;
 	while (h < N)
@@ -90,7 +90,7 @@ void Merge(DSA<T>& arr, size_t l, size_t mid, size_t r)
 	}
 
 	size_t i = 0, j = 0, k = l;
-	auto ls = left.GetSize(), rs = right.GetSize();
+	auto ls = left.cur_size(), rs = right.cur_size();
 	while (i < ls && j < rs)
 	{
 		if (left[i] < right[j])
@@ -145,7 +145,7 @@ void Heapify(DSA<T>& arr, size_t i, size_t n)
 template <typename T>
 void HeapSort(DSA<T>& arr)
 {
-	auto n = arr.GetSize();
+	auto n = arr.cur_size();
 	for (size_t i = n / 2 - 1; i >= 0 && i < n; i--)
 		Heapify(arr, i, n);
 
