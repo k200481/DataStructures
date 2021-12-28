@@ -226,6 +226,18 @@ public:
 	{
 		return first == nullptr;
 	}
+
+	iterator find(const T& val)
+	{
+		for (auto i = begin(); i != end(); ++i)
+		{
+			if (*i == val)
+			{
+				return i;
+			}
+		}
+		return end();
+	}
 	
 	// iterator to first element
 	iterator begin()
