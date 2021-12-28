@@ -146,6 +146,7 @@
     <ClInclude Include="DSA.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HashMap.h" />
+    <ClInclude Include="HashMapAlts.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Queue.h" />
