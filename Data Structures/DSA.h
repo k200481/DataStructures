@@ -77,11 +77,11 @@ public:
 			return *ptr;
 		}
 
-		bool operator==(const iterator& rhs) const
+		bool operator==(const const_iterator& rhs) const
 		{
 			return ptr == rhs.ptr;
 		}
-		bool operator!=(const iterator& rhs) const
+		bool operator!=(const const_iterator& rhs) const
 		{
 			return !(*this == rhs);
 		}
