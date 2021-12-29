@@ -16,7 +16,7 @@ public:
 	
 	void push(const T& val)
 	{
-		if (top_ptr >= arr.cur_size())
+		if (top_ptr >= arr.size())
 		{
 			arr.push_back(val);
 			top_ptr++;
@@ -88,17 +88,9 @@ public:
 
 	void push(const T& val)
 	{
-		if (top_ptr == nullptr)
-		{
-			top_ptr = new Node(val);
-			return;
-		}
-		Node* ptr = top_ptr;
-		while (ptr->next != nullptr)
-		{
-			ptr = ptr->next;
-		}
-		ptr->next = new Node(val);
+		Node* new_node = new Node(val);
+		new_node->next = top_ptr;
+		top_ptr = new_node;
 	}
 	const T& top()
 	{
