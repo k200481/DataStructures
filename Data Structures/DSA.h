@@ -167,7 +167,7 @@ public:
 		T* temp = arr;
 		arr = new T[new_size];
 		std::copy(temp, temp + cur_size, arr);
-		delete temp;
+		delete[] temp;
 		max_size = new_size;
 	}
 
