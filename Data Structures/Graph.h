@@ -218,6 +218,38 @@ public:
 			ans.pop();
 		}
 	}
+	// detects any cycle within the graph
+	bool IsCyclic() const
+	{
+		LinkedListQueue<DSA<size_t>> paths;
+
+		for (size_t i = 0; i < verts.size(); i++)
+		{
+			DSA<size_t> path;
+			path.push_back(i);
+
+			paths.push(path);
+			while (!paths.empty())
+			{
+				auto front = paths.front();
+				paths.pop();
+
+				auto last = front.back();
+				for (auto& e : edges[last])
+				{
+					if (front.Has(e.dst))
+					{
+						return true;
+					}
+
+					auto new_path = front;
+					new_path.push_back(e.dst);
+					paths.push(new_path);
+				}
+			}
+		}
+		return false;
+	}
 
 private:
 	// recursive DFS for TopSort
