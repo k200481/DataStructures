@@ -20,7 +20,7 @@ private:
 public:
 	Graph() = default;
 	// adds a new vertex to the graph
-	void AddVertex(size_t val)
+	void AddVertex(const T& val)
 	{
 		verts.push_back(val);
 		edges.push_back(SinglyLinkedList<Edge>());
@@ -45,7 +45,7 @@ public:
 		}
 
 		edges[src_idx].push_back({ src_idx, dst_idx, weight });
-		edges[dst_idx].push_back({ dst_idx, src_idx, weight });
+		//edges[dst_idx].push_back({ dst_idx, src_idx, weight });
 	}
 	// performs depth first search on graph starting at the given source node
 	// and outputs all paths found
@@ -188,8 +188,49 @@ public:
 			std::cout << "dist(" << verts[i] << ") = " << dist[i] << std::endl;
 		}
 	}
+	// performs topological sort to produce a topological ordering of the graph
+	void TopSort()
+	{
+		DSA<bool> visited(verts.size(), false);
+		LinkedListStack<size_t> ans;
+		
+		size_t idx = 0;
+		while (true)
+		{
+			TopSortHelper(idx, ans, visited);
+			bool completed = true;
+			for (size_t i = 0; i < verts.size(); i++)
+			{
+				if (!visited[i])
+				{
+					idx = i;
+					completed = false;
+				}
+			}
+
+			if (completed)
+				break;
+		}
+
+		while (!ans.empty())
+		{
+			std::cout << verts[ans.top()] << ' ';
+			ans.pop();
+		}
+	}
 
 private:
+	// recursive DFS for TopSort
+	void TopSortHelper(size_t idx, LinkedListStack<size_t>& ans, DSA<bool>& visited)
+	{
+		visited[idx] = true;
+		for (const auto& e : edges[idx])
+		{
+			if (!visited[e.dst])
+				TopSortHelper(e.dst, ans, visited);
+		}
+		ans.push(idx);
+	}
 	// returs the index of a given vertex
 	// if vertex does not exist, returns the size of the vertex array
 	size_t GetVertIdx(const T& val)
