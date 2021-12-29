@@ -49,7 +49,7 @@ public:
 	}
 	// performs depth first search on graph starting at the given source node
 	// and outputs all paths found
-	void BFS(const T& src)
+	void BFS(const T& src) const
 	{
 		auto src_idx = GetVertIdx(src);
 		if (src_idx == verts.size())
@@ -98,7 +98,7 @@ public:
 	}
 	// performs depth first search on graph starting at the given source node
 	// and outputs all paths found
-	void DFS(const T& src)
+	void DFS(const T& src) const
 	{
 		size_t src_idx = GetVertIdx(src);
 		if (src_idx == verts.size())
@@ -147,7 +147,7 @@ public:
 	}
 	// runs the bellman ford algorithm on the graph to find the 
 	// shortest path to every node from the given source node
-	void Bellmanford(const T& src)
+	void Bellmanford(const T& src) const
 	{
 		size_t src_idx = GetVertIdx(src);
 		size_t num_verts = verts.size();
@@ -189,7 +189,7 @@ public:
 		}
 	}
 	// performs topological sort to produce a topological ordering of the graph
-	void TopSort()
+	void TopSort() const
 	{
 		DSA<bool> visited(verts.size(), false);
 		LinkedListStack<size_t> ans;
@@ -221,7 +221,7 @@ public:
 
 private:
 	// recursive DFS for TopSort
-	void TopSortHelper(size_t idx, LinkedListStack<size_t>& ans, DSA<bool>& visited)
+	void TopSortHelper(size_t idx, LinkedListStack<size_t>& ans, DSA<bool>& visited) const
 	{
 		visited[idx] = true;
 		for (const auto& e : edges[idx])
@@ -233,7 +233,7 @@ private:
 	}
 	// returs the index of a given vertex
 	// if vertex does not exist, returns the size of the vertex array
-	size_t GetVertIdx(const T& val)
+	size_t GetVertIdx(const T& val) const
 	{
 		for (size_t i = 0; i < verts.size(); i++)
 		{
